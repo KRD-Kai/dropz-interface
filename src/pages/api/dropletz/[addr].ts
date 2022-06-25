@@ -6,7 +6,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     let { addr } = req.query;
-    let tasks = {
+    let dropletz = {
         ownsEns: false,
         depositedOpti: false,
     };
@@ -15,10 +15,10 @@ export default async function handler(
     const domains = await getENSDomains(addr);
     const optiDeposits = await getOptiDeposits(addr);
 
-    if (domains?.length > 0) tasks.ownsEns = true;
-    if (optiDeposits?.length > 0) tasks.depositedOpti = true;
+    if (domains?.length > 0) dropletz.ownsEns = true;
+    if (optiDeposits?.length > 0) dropletz.depositedOpti = true;
 
-    res.status(200).json({ tasks: tasks });
+    res.status(200).json({ dropletz: dropletz });
 }
 
 async function getENSDomains(addr: any) {
