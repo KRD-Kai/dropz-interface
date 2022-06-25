@@ -81,15 +81,7 @@ const Home: NextPage = () => {
                 </div>
             </main>
 
-            <footer className={styles.footer}>
-                <a
-                    href="https://rainbow.me"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Made with ❤️ by your frens at 🌈
-                </a>
-            </footer>
+            <footer className={styles.footer}>By Kai and Matthew</footer>
         </div>
     );
 };
