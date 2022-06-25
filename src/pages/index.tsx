@@ -3,7 +3,7 @@ import Head from "next/head";
 import Layout from "../components/layout/Layout";
 
 const Home: NextPage = () => {
-    return <Layout>App</Layout>;
+    return <>App</>;
 };
 
 export default Home;
