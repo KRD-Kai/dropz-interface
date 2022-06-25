@@ -15,7 +15,7 @@ export default async function handler(
     res.status(200).json({ tasks: tasks });
 }
 
-async function getENSDomains(addr) {
+async function getENSDomains(addr: any) {
     const response = await fetch(
         `https://gateway.thegraph.com/api/${process.env.GRT_APIKEY}/subgraphs/id/EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx`,
         {
