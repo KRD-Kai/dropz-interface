@@ -1,9 +1,18 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Layout from "../components/layout/Layout";
+// import { Worldcoin } from "../components/Worldcoin";
+import dynamic from "next/dynamic";
+
+const Worldcoin = dynamic(() => import("../components/Worldcoin"), {
+    ssr: false,
+});
 
 const Home: NextPage = () => {
-    return <Layout>App</Layout>;
+    return (
+        <>
+            Hello
+            <Worldcoin />
+        </>
+    );
 };
 
 export default Home;

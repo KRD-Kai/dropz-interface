@@ -10,6 +10,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { ChakraProvider } from "@chakra-ui/react";
+import Layout from "../components/layout/Layout";
 
 const { chains, provider, webSocketProvider } = configureChains(
     [
@@ -53,7 +54,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
                 <ChakraProvider>
-                    <Component {...pageProps} />
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
                 </ChakraProvider>
             </RainbowKitProvider>
         </WagmiConfig>
