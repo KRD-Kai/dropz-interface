@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import Navbar from "./Navbar";
+import SidebarHeader from "./SidebarHeader";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
     return (
         <Flex direction="column" minH="100vh">
             <header>
-                <Navbar />
+                <SidebarHeader>{children}</SidebarHeader>
             </header>
             <Box as="main" flexGrow={1}>
                 {children}
