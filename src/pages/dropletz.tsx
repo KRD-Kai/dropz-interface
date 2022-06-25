@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import useSWR from "swr";
+import DropletCard from "../components/DropletCard";
+
 const fetcher = async (
     input: RequestInfo,
     init: RequestInit,
@@ -52,12 +53,11 @@ const Home: NextPage = () => {
     console.log(data);
     return (
         <>
-            <div>
-                {Object.keys(data.dropletz).map((droplet) => {
-                    if (data.dropletz[droplet] === true) return;
-                    return <li key={droplet}>{droplet}</li>;
-                })}
-            </div>
+            <DropletCard droplet={data.dropletz[0]} />
+            {Object.keys(data.dropletz).map((droplet) => {
+                if (data.dropletz[droplet] === true) return;
+                return <li key={droplet}>{droplet}</li>;
+            })}
         </>
     );
 };
