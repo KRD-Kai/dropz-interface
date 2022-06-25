@@ -31,6 +31,7 @@ import {
     FiMenu,
     FiBell,
     FiChevronDown,
+    FiDroplet,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
@@ -39,11 +40,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 interface LinkItemProps {
     name: string;
     icon: IconType;
+    href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-    { name: "Home", icon: FiHome },
-    { name: "Overview", icon: FiTrendingUp },
-    { name: "Droplets", icon: FiCompass },
+    { name: "Home", icon: FiHome, href: "/" },
+    { name: "Overview", icon: FiTrendingUp, href: "/overview" },
+    { name: "Dropletz", icon: FiDroplet, href: "/dropletz" },
 ];
 
 export default function SidebarWithHeader({
@@ -111,7 +113,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 />
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon}>
+                <NavItem key={link.name} icon={link.icon} href={link.href}>
                     {link.name}
                 </NavItem>
             ))}
@@ -121,12 +123,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
     icon: IconType;
+    href: string;
     children: ReactText;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, href, children, ...rest }: NavItemProps) => {
     return (
         <Link
-            href="#"
+            href={href}
             style={{ textDecoration: "none" }}
             _focus={{ boxShadow: "none" }}
         >
