@@ -13,8 +13,12 @@ import {
 import NextLink from "next/link";
 import { isExternal } from "util/types";
 
+<<<<<<< Updated upstream
 // import Image from "next/image";
 export default function socialProfileWithImageHorizontal({ droplet }) {
+=======
+export default function SocialProfileWithImageHorizontal() {
+>>>>>>> Stashed changes
     return (
         <Center py={6}>
             <Stack
