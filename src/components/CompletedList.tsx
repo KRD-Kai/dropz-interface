@@ -29,7 +29,7 @@ export default function GridListWithHeading({ dropletz }) {
     return (
         <Box p={4}>
             <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
-                <Heading fontSize={"3xl"}>Your completed dropletz</Heading>
+                <Heading fontSize={"2xl"}>Your completed dropletz</Heading>
             </Stack>
 
             <Container maxW={"6xl"} mt={10}>
