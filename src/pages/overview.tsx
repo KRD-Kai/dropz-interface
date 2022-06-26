@@ -1,6 +1,14 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
+import {
+    Alert,
+    AlertIcon,
+    Center,
+    Spinner,
+    Box,
+    Text,
+    Divider,
+} from "@chakra-ui/react";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import CompletedList from "../components/CompletedList";
@@ -31,7 +39,28 @@ const Home: NextPage = () => {
         const { isVerified } = isVerifiedData;
         return (
             <>
-                Verified: {isVerified ? "Yes" : <Worldcoin />}
+                <Box textAlign="center">
+                    Verification status:{" "}
+                    {isVerified ? (
+                        <>
+                            <Text as="b" textColor="green.700">
+                                Verified
+                            </Text>
+                            🎉. You are eligible for airdrops
+                        </>
+                    ) : (
+                        <>
+                            <Text as="b" textColor="red.700">
+                                Unverified ❌
+                            </Text>
+                            . Please verify your wallet as a person:
+                            <br />
+                            <Center marginTop="1em">
+                                <Worldcoin />
+                            </Center>
+                        </>
+                    )}
+                </Box>
                 <CompletedList dropletz={dropletData.dropletz} />;
             </>
         );
@@ -48,13 +77,15 @@ const Home: NextPage = () => {
     }
     if (!dropletData) {
         return (
-            <Spinner
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="blue.500"
-                size="xl"
-            />
+            <Center>
+                <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    emptyColor="gray.200"
+                    color="blue.500"
+                    size="xl"
+                />
+            </Center>
         );
     }
     if (!account) {
