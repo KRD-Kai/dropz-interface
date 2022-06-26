@@ -34,15 +34,22 @@ export default async function handler(
             completed: false,
             desc: "Bridge L1 assets to Polygon",
             link: "https://wallet.polygon.technology/login/",
-            handle: "@polygon"
+            handle: "@0xpolygon"
         },
         {
             appName: "Polygon",
             completed: false,
             desc: "Validate on the Heimdall, Polygon's POS Verifier layer",
             link: "https://docs.polygon.technology/docs/maintain/validate/validator-index/",
-            handle: "@polygon"
+            handle: "@0xpolygon"
 
+        },
+        {
+            appName: "POAP",
+            completed: false,
+            desc: "Own a POAP token",
+            link: "https://poap.xyz/",
+            handle: "@poapxyz"
         }
     ];
 
@@ -50,14 +57,16 @@ export default async function handler(
     const domains = await getENSDomains(addr);
     const optiDeposits = await getOptiDeposits(addr);
     const poly = await getPolyDeposit(addr);
+    // TODO: fixed potential undefined
     const polyDeposits = poly[0];
     const polyValidate = poly[1];
+    const poap = await getPoap(addr);
 
     if (domains?.length > 0) dropletz[0].completed = true;
     if (optiDeposits?.length > 0) dropletz[1].completed = true;
     if (polyDeposits?.length > 0) dropletz[2].completed = true;
     if (polyValidate?.length > 0) dropletz[3].completed = true;
-    console.log("polyDeposits len: ", polyDeposits);
+    if (poap?.length > 0) dropletz[4].completed = true;
 
     res.status(200).json({ dropletz: dropletz });
 }
@@ -188,6 +197,42 @@ async function getValidator(addr: any) {
     }
     catch{
         console.log("this was an error");
+    }
+    
+    // console.log("Polygon depo:", deposit);
+    
+}
+
+// Add checks for POAP tasks
+async function getPoap(addr: any) {
+    const response = await fetch(
+        `https://gateway.thegraph.com/api/${process.env.GRT_APIKEY}/subgraphs/id/3wrR9hnVGJvVhgdBsTywu9Xnu5sntVKWwphuossQmuV8`,
+        {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                query: `
+            query {
+                accounts(where: {id: "${addr.toLowerCase()}"}) {
+                    id
+                    tokensOwned
+                }
+            }`,
+            }),
+        }
+    );
+    const responseBody = await response.json();
+    console.log("poap response: ", responseBody);
+    // console.log("polygon response: ", responseBody)
+    try{
+        const poap = responseBody.data.accounts;
+        console.log("poap", poap);
+        return poap;
+    }
+    catch{
+        console.log("poap error");
     }
     
     // console.log("Polygon depo:", deposit);
