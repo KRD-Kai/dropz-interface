@@ -9,27 +9,23 @@ import {
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { ChakraProvider } from "@chakra-ui/react";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 import Layout from "../components/layout/Layout";
 
 const { chains, provider, webSocketProvider } = configureChains(
-    [
-        chain.mainnet,
-        // chain.polygon,
-        // chain.optimism,
-        // chain.arbitrum,
-        ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true"
-            ? [chain.goerli, chain.kovan, chain.rinkeby, chain.ropsten]
-            : []),
-    ],
+    [chain.mainnet, chain.polygon],
     [
         jsonRpcProvider({
-            rpc: () => ({
-                http: String(process.env.POKT_URL),
+            rpc: (chain) => ({
+                http: String(process.env.RPC_URL),
             }),
+            weight: 1,
         }),
+        alchemyProvider({ priority: 1, weight: 2 }),
+        publicProvider(),
     ]
 );
-
 const connectors = connectorsForWallets([
     {
         groupName: "Recommended",
