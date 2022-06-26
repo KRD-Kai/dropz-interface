@@ -34,23 +34,22 @@ export default async function handler(
             completed: false,
             desc: "Bridge L1 assets to Polygon",
             link: "https://wallet.polygon.technology/login/",
-            handle: "@0xpolygon"
+            handle: "@0xpolygon",
         },
         {
             appName: "Polygon",
             completed: false,
             desc: "Validate on the Heimdall, Polygon's POS Verifier layer",
             link: "https://docs.polygon.technology/docs/maintain/validate/validator-index/",
-            handle: "@0xpolygon"
-
+            handle: "@0xpolygon",
         },
         {
             appName: "POAP",
             completed: false,
             desc: "Own a POAP token",
             link: "https://poap.xyz/",
-            handle: "@poapxyz"
-        }
+            handle: "@poapxyz",
+        },
     ];
 
     // TODO: Run these calls in parallel
@@ -155,17 +154,15 @@ async function getPolyDeposit(addr: any) {
     console.log("poly deposit", responseBody.data.fxDeposits);
     console.log("poly validate: ", responseBody.data.validators);
     // console.log("polygon response: ", responseBody)
-    try{
+    try {
         const deposit = responseBody.data.fxDeposits;
         const validate = responseBody.data.validators;
         return [deposit, validate];
-    }
-    catch{
+    } catch {
         console.log("this was an error");
     }
-    
+
     // console.log("Polygon depo:", deposit);
-    
 }
 
 async function getValidator(addr: any) {
@@ -191,22 +188,19 @@ async function getValidator(addr: any) {
     const responseBody = await response.json();
     console.log("poly response: ", responseBody);
     // console.log("polygon response: ", responseBody)
-    try{
+    try {
         const deposit = responseBody.data.fxDeposits;
         return deposit;
-    }
-    catch{
+    } catch {
         console.log("this was an error");
     }
-    
-    // console.log("Polygon depo:", deposit);
-    
 }
 
 // Add checks for POAP tasks
 async function getPoap(addr: any) {
+    console.log("YEEEE", addr.toLowerCase());
     const response = await fetch(
-        `https://gateway.thegraph.com/api/${process.env.GRT_APIKEY}/subgraphs/id/3wrR9hnVGJvVhgdBsTywu9Xnu5sntVKWwphuossQmuV8`,
+        `https://api.thegraph.com/subgraphs/name/poap-xyz/poap-xdai`,
         {
             method: "POST",
             headers: {
@@ -226,15 +220,12 @@ async function getPoap(addr: any) {
     const responseBody = await response.json();
     console.log("poap response: ", responseBody);
     // console.log("polygon response: ", responseBody)
-    try{
-        const poap = responseBody.data.accounts;
-        console.log("poap", poap);
-        return poap;
-    }
-    catch{
+    try {
+        const poapsOwned = responseBody.data.accounts[0].tokensOwned;
+        return poapsOwned;
+    } catch {
         console.log("poap error");
     }
-    
+
     // console.log("Polygon depo:", deposit);
-    
 }
