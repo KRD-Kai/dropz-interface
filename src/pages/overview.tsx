@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                         </>
                     )}
                 </Box>
-                <CompletedList dropletz={dropletData.dropletz} />;
+                <CompletedList dropletz={dropletData.dropletz} />
             </>
         );
     }
