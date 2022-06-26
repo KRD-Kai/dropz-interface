@@ -18,7 +18,7 @@ const { chains, provider, webSocketProvider } = configureChains(
     [
         jsonRpcProvider({
             rpc: (chain) => ({
-                http: String(process.env.RPC_URL),
+                http: String(process.env.POKT_URL),
             }),
             weight: 1,
         }),
