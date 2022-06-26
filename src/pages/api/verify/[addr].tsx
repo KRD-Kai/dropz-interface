@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const verifiedAddrs: string[] = [];
 const verifiedNullHashes: string[] = [];
-export async function verifyAddress(addr: string, nullHash: string) {
+export function verifyAddress(addr: string, nullHash: string) {
     console.log(verifiedNullHashes, verifiedNullHashes.includes(nullHash));
     if (verifiedNullHashes.includes(nullHash)) {
         throw "Person has already verified";
@@ -24,8 +24,14 @@ export default async function handler(
 ) {
     if (req.method === "POST") {
         console.log("HII");
-        verifyAddress(req.body.addr, req.body.nullHash);
-        res.status(200).json({ 1: 1 });
+        try {
+            verifyAddress(req.body.addr, req.body.nullHash);
+            res.status(200).json({ 1: 1 });
+        } catch {
+            res.status(409).send({
+                message: "Error: Already verified a wallet",
+            });
+        }
     } else if (req.method === "GET") {
         const { addr } = req.query;
         console.log(addr, verifiedAddrs);
