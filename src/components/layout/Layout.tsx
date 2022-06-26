@@ -12,9 +12,6 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
             <header>
                 <SidebarHeader>{children}</SidebarHeader>
             </header>
-            <Box as="main" flexGrow={1}>
-                {children}
-            </Box>
         </Flex>
     );
 };
