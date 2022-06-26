@@ -22,6 +22,10 @@ export default function socialProfileWithImageHorizontal({ droplet }) {
                 borderRadius="lg"
                 w={{ sm: "100%", md: "540px" }}
                 height={{ sm: "476px", md: "15rem" }}
+                direction={{ base: "column", md: "row" }}
+                bg={useColorModeValue("white", "gray.900")}
+                boxShadow={"2xl"}
+                padding={4}
             >
                 <Flex flex={1} bg="grey.200">
                     <Image
