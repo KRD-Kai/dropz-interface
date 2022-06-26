@@ -51,10 +51,21 @@ const Home: NextPage = () => {
         );
     }
     console.log(data);
+    let tasks_completed = 0;
     return (
         <>
-            {data.dropletz.map((droplet) => {
-                if (droplet.completed === true) return;
+            {data.dropletz.map((droplet: any) => {
+                if (droplet.completed === true){
+                    ++tasks_completed;
+                    console.log("tasks completed: ", tasks_completed);
+                    return;
+                } 
+                return (
+                    <>
+                    <DropletCard key={droplet.appName} droplet={droplet} />
+                    {/* <p className="drop"></p> */}
+                    </>
+                );
                 return <DropletCard key={droplet.appName} droplet={droplet} />;
             })}
         </>
