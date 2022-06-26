@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import "dotenv/config";
 
 interface Droplet {
     appName: string;

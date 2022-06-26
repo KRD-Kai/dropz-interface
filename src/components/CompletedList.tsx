@@ -8,28 +8,34 @@ import {
     Stack,
     HStack,
     VStack,
+    Center,
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 
 // Replace test data with your own
 
 export default function GridListWithHeading({ dropletz }) {
-    console.log(dropletz);
-
+    let completedCount = 0;
     const features = dropletz
         .filter((droplet) => droplet.completed)
         .map(function (droplet, i) {
+            completedCount++;
             return {
                 id: i,
                 title: droplet.appName,
                 text: droplet.desc,
             };
         });
-    console.log("FEATES", features);
     return (
         <Box p={4}>
             <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
                 <Heading fontSize={"2xl"}>Your completed dropletz</Heading>
+                <Text color={"gray.600"} fontSize="2xl">
+                    Engagement score:{" "}
+                    <Text as="span" color={"green.800"} fontSize="3xl">
+                        {(completedCount / dropletz.length) * 100}%
+                    </Text>
+                </Text>
             </Stack>
 
             <Container maxW={"6xl"} mt={10}>
@@ -47,6 +53,11 @@ export default function GridListWithHeading({ dropletz }) {
                     ))}
                 </SimpleGrid>
             </Container>
+
+            <Center>
+                {completedCount == 0 &&
+                    "None yet :( Head over to the droplets page!"}
+            </Center>
         </Box>
     );
 }
