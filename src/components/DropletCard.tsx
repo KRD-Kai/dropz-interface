@@ -21,7 +21,7 @@ export default function socialProfileWithImageHorizontal({ droplet }) {
                 borderWidth="1px"
                 borderRadius="lg"
                 w={{ sm: "100%", md: "540px" }}
-                height={{ sm: "476px", md: "20rem" }}
+                height={{ sm: "476px", md: "15rem" }}
                 direction={{ base: "column", md: "row" }}
                 bg={useColorModeValue("white", "gray.900")}
                 boxShadow={"2xl"}
@@ -29,8 +29,7 @@ export default function socialProfileWithImageHorizontal({ droplet }) {
             >
                 <Flex flex={1} bg="grey.200">
                     <Image
-                        objectFit="cover"
-                        boxSize="100%"
+                        objectFit="contain"
                         src={`/${droplet.appName}.png`}
                         alt={`${droplet.appName} logo`}
                     />

@@ -53,10 +53,9 @@ const Home: NextPage = () => {
     console.log(data);
     return (
         <>
-            <DropletCard droplet={data.dropletz[0]} />
-            {Object.keys(data.dropletz).map((droplet) => {
-                if (data.dropletz[droplet] === true) return;
-                return <li key={droplet}>{droplet}</li>;
+            {data.dropletz.map((droplet) => {
+                if (droplet.completed === true) return;
+                return <DropletCard key={droplet.appName} droplet={droplet} />;
             })}
         </>
     );
