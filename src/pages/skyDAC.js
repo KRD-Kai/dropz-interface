@@ -26,7 +26,6 @@ export const useProfile = (userAuthStatus, isKernelLoaded) => {
         const result = await profileDAC.getProfile(userID);
         let test_r = result;
         test_r['ext'] = "stuff";
-        const fuck = test_r;
         const set = await profileDAC.setProfile(fuck);
         const plswork = await profileDAC.getProfile(result);
         console.log(plswork.json());
