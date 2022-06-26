@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
+import { Alert, AlertIcon, Center, Spinner } from "@chakra-ui/react";
 import useSWR from "swr";
 import DropletCard from "../components/DropletCard";
 
@@ -31,13 +31,15 @@ const Home: NextPage = () => {
         );
     if (!data) {
         return (
-            <Spinner
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="blue.500"
-                size="xl"
-            />
+            <Center>
+                <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    emptyColor="gray.200"
+                    color="blue.500"
+                    size="xl"
+                />
+            </Center>
         );
     }
     if (!account) {

@@ -26,6 +26,7 @@ export default function Worldcoin(): JSX.Element {
             if (!res.ok) {
                 throw res;
             }
+            window.location.reload();
         } catch (err) {
             console.warn("World ID verification failed:", err);
             toast({
@@ -46,13 +47,13 @@ export default function Worldcoin(): JSX.Element {
                 signal: "any_string",
             });
         }
-
         if (worldID.isInitialized() && !worldID.isEnabled()) {
             enableWorldId();
         }
     };
 
     useLayoutEffect(() => {
+        console.log(worldID.isInitialized(), worldID.isEnabled());
         activateWorldId();
     }, []);
 
